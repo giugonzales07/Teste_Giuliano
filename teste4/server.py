@@ -1,11 +1,22 @@
 from fastapi import FastAPI
 import pandas as pd
+from fastapi.middleware.cors import CORSMiddleware 
 
 app = FastAPI()
+
+# Permitindo acesso do frontend (Vue.js) no backend (FastAPI)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:8080"],  # Permite o frontend
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 df_operadoras = pd.read_csv('Relatorio_cadop.csv', sep=';')
 df_operadoras = df_operadoras.fillna('') # Tradando valores NaN
 
+# Faz a busca em todos os campos textuais do CSV
 @app.get("/busca/")
 def busca_textual(texto_busca):
     registros = []

@@ -10,8 +10,8 @@ bs4 = "*"
 tabula = "*"
 tabula-py = "*"
 openpyxl = "*"
-fastapi = "*"
 uvicorn = "*"
+fastapi = {extras = ["all"], version = "*"}
 
 [dev-packages]
 ipykernel = "*"
